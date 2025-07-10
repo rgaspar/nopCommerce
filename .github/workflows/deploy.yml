@@ -1,0 +1,22 @@
+name: Build and Deploy nopCommerce
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    - name: Restore dependencies
+      run: dotnet restore ./src/NopCommerce.sln
+    - name: Build
+      run: dotnet build ./src/NopCommerce.sln --configuration Release --no-restore
+    - name: Publish
+      run: dotnet publish ./src/Presentation/Nop.Web/Nop.Web.csproj -c Release -o ./publish
+    # Add deployment steps here (Azure, FTP, etc.)
