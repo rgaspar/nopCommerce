@@ -20,3 +20,4 @@ jobs:
     - name: Publish
       run: dotnet publish ./src/Presentation/Nop.Web/Nop.Web.csproj -c Release -o ./publish
     # Add deployment steps here (Azure, FTP, etc.)
+    # trigger test run
